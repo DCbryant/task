@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=" utf-8">
+    <title>自定义网页右键菜单</title>
+    <style type="text/css">
+        body,
+        div,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        
+        #cen {
+            font-size: 24px;
+            color: orangered;
+            text-align: center;
+        }
+        
+        #menu {
+            position: absolute;
+            display: none;
+        }
+        
+        #menu ul {
+            position: absolute;
+            float: left;
+            border: 1px solid #979797;
+            background: #f1f1f1;
+            padding: 2px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, .6);
+            width: 230px;
+            overflow: hidden;
+        }
+        
+        #menu ul li {
+            float: left;
+            clear: both;
+            height: 24px;
+            cursor: pointer;
+            line-height: 24px;
+            white-space: nowrap;
+            padding: 0 30px;
+            width: 100%;
+            display: inline-block;
+        }
+        
+        #menu ul li:hover {
+            background: #E6EDF6;
+            border: 1px solid #B4D2F6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cen">点击鼠标右键</div>
+    <div id="menu">
+        <ul>
+            <li>menu item1</li>
+            <li>menu item2</li>
+        </ul>
+    </div>
+</body>
+<script>
+    document.oncontextmenu = function (e) {
+        var oEvent = e || event;
+        var oDiv = document.getElementById('menu');
+
+        var x = oEvent.clientX;
+        var y = oEvent.clientY;
+        var winW = document.body.clientWidth || document.documentElement.clientWidth;
+        var winH = document.body.clientHeight || document.documentElement.clientHeight;
+        e.defaultPrevented;
+        menu.style.display = 'block';
+        if (x > (winW - 200) && y > (winH - 90)) {
+            menu.style.left = (x-200) + 'px';
+            menu.style.top = (y-90) + 'px';
+        } else if (x > (winW - 200)) {
+            menu.style.left = (x-200) + 'px';
+            menu.style.top = y + 'px';
+        } else if (y > (winH - 90)) {
+            menu.style.left = x + 'px';
+            menu.style.top = (y-90) + 'px';
+        } else {
+            menu.style.left = x + 'px';
+            menu.style.top = y + 'px';
+        }
+
+        return false;
+    };
+    document.onclick = function () {
+        var oDiv = document.getElementById('menu');
+        oDiv.style.display = 'none';
+    };
+
+</script>
+
+</html>
