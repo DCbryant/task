@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- 通过背景精灵图实现 -->
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>checkbox等样式</title>
+    <style>
+        #main{
+            margin: 200px auto;
+            padding: 0;
+            text-align: center;
+        }
+
+    	input {
+    		display: none;
+    	}
+		/*相对的父元素*/
+    	.img-checkbox, .img-radio {
+            display: inline-block;
+    		width: 16px;
+    		height: 16px;
+    		padding-left: 25px;
+            margin-right: 15px;
+    		background-repeat: no-repeat;
+    		position: relative;
+       	}
+
+		/*子*/
+    	label {
+            display: inline-block;
+    		cursor: pointer;
+    		width: 16px;
+    		height: 16px;
+    		position: absolute;
+    		top: 0;
+    		left: 0;
+    		background-image: url(bg.png);
+    	}
+
+		/*根据上面定位*/
+    	.img-checkbox label {
+    		background-position: 75px 17px;
+    	}
+    	input[type=checkbox]:checked + label {
+    		background-position: 40px 17px;
+    	}
+    	.img-radio label {
+    		background-position: 76px 40px;
+    	}
+    	input[type=radio]:checked + label {
+    		background-position: 41px 40px;
+    	}
+    </style>
+</head>
+
+<body>
+    <div id = "main">
+        <div class="img-radio">
+            <input id="radio2" type="radio" >
+            <label for="radio2"></label>
+        </div>
+
+        <!--// checkbox input-->
+        <div class="img-checkbox">
+            <input id="check2" type="checkbox" >
+            <label for="check2"></label>
+        </div>
+    </div>
+</body>
+
+</html>

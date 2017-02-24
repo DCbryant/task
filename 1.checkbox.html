@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <style>
+        /*用伪元素实现*/
+        /*居中*/
+        
+        #main{
+            margin: 200px auto;
+            padding: 0;
+            text-align: center;
+        }
         /*让input消失，用lable来模拟input*/
         input[type=radio],
         input[type=checkbox] {
             display: none;
         }    
 
+        /* 相对意义上的父元素*/
         label {
             display: inline-block;
             cursor: pointer;
@@ -19,6 +28,7 @@
             font-size: 16px;
         }
 
+        /*子元素*/
         label:before {
             content: "";
             display: inline-block;
@@ -26,16 +36,20 @@
             height: 16px;
             background-color: #fff;
             border: 1px solid red;
+            margin-right: 10px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
         }
         
-        /*将input设置为圆形*/
-        .radio label:before {
-            border-radius: 10px;
+        /*将radio设置为圆形*/
+        .style-radio label:before {
+            border-radius: 50%;
         }
-       
 
         /*radio check之后的状态*/
         input[type=radio]:checked + label:before {
+            /*圆点*/
             content: "\2022";
             color: red;
             font-size: 16px;
@@ -48,6 +62,7 @@
 
         /*checkbox check之后的状态*/
         input[type=checkbox]:checked + label:before {
+            /*对勾*/
             content: "\2713";
             font-size: 16px;
             color: red;
@@ -55,22 +70,23 @@
             height: 16px;
             line-height: 16px;
         }
-       
+
     </style>
 </head>
 <body>
+    <div id="main">
+        <!--// radio input-->
+        <!--<span>在这儿</span>-->
+        <div class="style-radio">
+            <input id="radio1" type="radio" >
+            <label for="radio1"></label>
+        </div>
 
-    <!--// radio input-->
-    <div class="radio">
-        <input id="radio1" type="radio" >
-        <label for="radio1"></label>
-    </div>
-
-    <!--// checkbox input-->
-    <div class="checkbox">
-        <input id="check1" type="checkbox" >
-        <label for="check1"></label>
-    </div>
-
+        <!--// checkbox input-->
+        <div class="style-checkbox">
+            <input id="check1" type="checkbox" >
+            <label for="check1"></label>
+        </div>
+    </div>        
 </body>
 </html>
