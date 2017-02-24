@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /*让input消失，用lable来模拟input*/
+        input[type=radio],
+        input[type=checkbox] {
+            display: none;
+        }    
+
+        label {
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            padding-left: 25px;
+            margin-right: 15px;
+            font-size: 16px;
+        }
+
+        label:before {
+            content: "";
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border: 1px solid red;
+        }
+        
+        /*将input设置为圆形*/
+        .radio label:before {
+            border-radius: 10px;
+        }
+       
+
+        /*radio check之后的状态*/
+        input[type=radio]:checked + label:before {
+            content: "\2022";
+            color: red;
+            font-size: 16px;
+            text-align: center;
+            height: 16px;
+            line-height: 16px;
+            /*display: inline-block;
+            vertical-align: middle;*/
+        }
+
+        /*checkbox check之后的状态*/
+        input[type=checkbox]:checked + label:before {
+            content: "\2713";
+            font-size: 16px;
+            color: red;
+            text-align: center;
+            height: 16px;
+            line-height: 16px;
+        }
+       
+    </style>
+</head>
+<body>
+
+    <!--// radio input-->
+    <div class="radio">
+        <input id="radio1" type="radio" >
+        <label for="radio1"></label>
+    </div>
+
+    <!--// checkbox input-->
+    <div class="checkbox">
+        <input id="check1" type="checkbox" >
+        <label for="check1"></label>
+    </div>
+
+</body>
+</html>
