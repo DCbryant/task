@@ -13,47 +13,35 @@
             padding: 0;
         }
         
-        ul {
-            list-style-type: none;
-        }
-        
         #cen {
-            font-size: 24px;
-            color: orangered;
+            width: 500px;
+            height: 300px;
+            background-color: greenyellow;
+            margin: 100px auto;
+            color: blue;
             text-align: center;
         }
         
         #menu {
             position: absolute;
             display: none;
-        }
-        
-        #menu ul {
-            position: absolute;
-            float: left;
-            border: 1px solid #979797;
-            background: #f1f1f1;
-            padding: 2px;
-            box-shadow: 2px 2px 2px rgba(0, 0, 0, .6);
-            width: 230px;
-            overflow: hidden;
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            border: 1px solid deepskyblue;
+            box-sizing: border-box;
+            /*此元素的内边距和边框不再会增加它的宽度*/
         }
         
         #menu ul li {
-            float: left;
-            clear: both;
-            height: 24px;
-            cursor: pointer;
-            line-height: 24px;
-            white-space: nowrap;
-            padding: 0 30px;
-            width: 100%;
-            display: inline-block;
+            list-style: none;
+            height: 33%;
+            text-align: center;
         }
         
         #menu ul li:hover {
-            background: #E6EDF6;
-            border: 1px solid #B4D2F6;
+            background: aqua;
+            border: 1px solid orangered;
         }
     </style>
 </head>
@@ -64,41 +52,59 @@
         <ul>
             <li>menu item1</li>
             <li>menu item2</li>
+            <li>menu item3</li>
         </ul>
     </div>
 </body>
 <script>
-    document.oncontextmenu = function (e) {
-        var oEvent = e || event;
-        var oDiv = document.getElementById('menu');
+    var 
+        cen = document.getElementById('cen'),
+        menu = document.getElementById('menu'),
+        aLi = document.getElementsByTagName('li');
 
-        var x = oEvent.clientX;
-        var y = oEvent.clientY;
-        var winW = document.body.clientWidth || document.documentElement.clientWidth;
-        var winH = document.body.clientHeight || document.documentElement.clientHeight;
-        e.defaultPrevented;
-        menu.style.display = 'block';
-        if (x > (winW - 200) && y > (winH - 90)) {
-            menu.style.left = (x-200) + 'px';
-            menu.style.top = (y-90) + 'px';
-        } else if (x > (winW - 200)) {
-            menu.style.left = (x-200) + 'px';
-            menu.style.top = y + 'px';
-        } else if (y > (winH - 90)) {
-            menu.style.left = x + 'px';
-            menu.style.top = (y-90) + 'px';
-        } else {
-            menu.style.left = x + 'px';
-            menu.style.top = y + 'px';
+    cen.oncontextmenu = function(e){
+        e.preventDefault();
+        if(cen.offsetHeight - e.clientY > menu.offsetHeight){//cen的高度-鼠标的高度>菜单的高度，此时鼠标点击处cen容得下菜单这么高
+            if(cen.offsetWidth - e.clientX > menu.offsetWidth){//cen的高度-鼠标宽度>菜单的宽度，此时鼠标能容下菜单整个大小,那么的左、上不变
+                menu.style.left = e.clientX + 'px';
+                menu.style.top = e.clientY + 'px';
+            }else{//能容高，不容宽，菜单top不变，left变为:鼠标大小-菜单宽度
+                menu.style.left = e.clientX - menu.offsetWidth + 'px';
+                menu.style.top = e.clientY + 'px';
+            }
+        }else{//不容高
+            if(cen.offsetWidth - e.clientX > menu.offsetWidth){//容宽不容高
+                menu.style.left = e.clientX + 'px';
+                menu.style.top = e.clientY-menu.offsetHeight+"px";
+            }else{//宽高都不容
+                menu.style.left = e.clientX-menu.offsetWidth+"px";
+                menu.style.top = e.clientY-menu.offsetHeight+"px";
+            }
         }
 
-        return false;
-    };
-    document.onclick = function () {
-        var oDiv = document.getElementById('menu');
-        oDiv.style.display = 'none';
-    };
+        menu.style.display = 'block';
+    }    
 
+    // 返回菜单点击内容
+    for(var i = 0,len = aLi.length;i<len;i++){
+        aLi[i].onclick = function(e){
+            alert(this.innerHTML);
+        }
+    }
+
+    // 点击非自定义菜单区域时，隐藏自定义菜单
+    document.oncontextmenu = function(e){
+        return false;
+    }
+
+    document.onclick = function(e){
+        menu.style.display = 'none';
+    }
+
+    // html:自定义区域、非自定义区域
+    // css：自定义区域、menu
+    //js:主要判断逻辑关系，即是自定义区域、菜单以及鼠标的点击等等宽高的判断
+    // 若自定义足够大，则菜单left = 鼠标；若不够（即是鼠标位置太大），则left = 鼠标 - menu
 </script>
 
 </html>
