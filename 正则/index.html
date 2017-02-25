@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <p>请输入电话号码</p>
+    <form action="#">  
+      <input id="cm" placeholder="移动">
+      <button >Check</button><br>
+      <input id="ct" placeholder="电信">
+      <button >Check</button><br>
+      <input id="cu" placeholder="联通">
+      <button >Check</button>
+    </form> 
+</body>
+<script>
+    //  * 手机号码
+    //  * 移动：134(0-8)、135、136、137、138、139、147（预计用于TD上网卡）、150、151、152、157（TD专用）、158、159、187（未启用）、188（TD专用）
+    //  * 联通：130、131、132、155、156（世界风专用）、185（未启用）、186（3g）
+    //  * 电信：133、153、180（未启用）、189
+    // 正则
+    var cm = /^1(34[0-8]|(3[5-9]|5[017-9]|8[78]|47)\d)\d{7}$/;
+    var ct = /^1(3[0-2]|5[56]|8[56])\d{8}$/;
+    var cu = /^1(33|53|8[09])\d{8}$/;
+    var array = [cm,ct,cu];
+    var aInput = document.getElementsByTagName('input'),
+        aButton = document.getElementsByTagName('button'),
+        len = aInput.length;
+       for(var i = 0;i<len;i++){
+            tel(i);
+       }
+
+       function tel(n){
+            aButton[n].onclick = function(i){
+            var value = aInput[0].value;
+            if(array[n].test(value)){
+                alert('号码:' + value + ' 符合格式');
+                console.log(array[n].test(value));
+            }else{
+                alert('号码:' + value + ' 不符合格式! 请重新输入');
+                console.log(array[n].test(value));
+            }
+            }
+       }
+        // aButton[0].onclick = function(){
+        //     var value = aInput[0].value;
+        //     if(cm.test(value)){
+        //         alert('号码:' + value + ' 符合格式');
+        //         console.log(cm.test(value));
+        //     }else{
+        //         alert('号码:' + value + ' 不符合格式! 请重新输入');
+        //         console.log(cm.test(value));
+        //     }
+            
+        // }
+
+
+      
+
+</script>
+</html>
