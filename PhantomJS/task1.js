@@ -16,7 +16,7 @@ page.open(url, function(s) {
         console.log('正在抓取');
         page.includeJs("http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js", function() {
             var dataList = page.evaluate(function() {
-                var data = []
+                var data = [];
                 var $result = $('.result');
                 $result.each(function() {
                     var imgs = $(this).find('.c-img')
@@ -29,15 +29,15 @@ page.open(url, function(s) {
                 })
                 return data;
             })
-            var data = {
+            result = {
                 code: 1,
                 msg: '抓起成功',
-                word: keyWord,
                 time: Date.now() - beginTime,
-                dataList: dataList
+                dataList: dataList,
+                word: keyWord
             }
             phantom.outputEncoding = 'gb2312';
-            console.log(JSON.stringify(data));
+            console.log(JSON.stringify(result));
             phantom.exit();
         })
     }
