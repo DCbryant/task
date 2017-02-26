@@ -6,6 +6,13 @@ var url = 'http://www.baidu.com/s?wd=' + keyWord;
 var result = {};
 var	beginTime = Date.now();
 
+// view了一下别人，也可以将json文件改成js文件，通过models.exports = config;
+// 然后在这里调用js文件方法，类似下面
+// page.settings.userAgent = option[device].userAgent;
+// page.viewportSize = {
+//   width: option[device].width,
+//   height: option[device].height
+// };
 // 读取device.json
 if(fs.exists('device.json')){
     var file = fs.open('device.json','r');
