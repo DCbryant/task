@@ -7,8 +7,10 @@ var	beginTime = Date.now();
 page.open(url, function(s) {
 	if (s !== 'success') {
 		console.log("open failed!");
-		result.code = 0;
-		result.msg = '抓取失败!';
+        result = {
+            code:0,
+            msg: "抓取失败"
+        };
 		console.log(JSON.stringify(result));
 		phantom.exit();
 	}else if(s === 'success' && s == 'success' && page.loadingProgress >= 100){

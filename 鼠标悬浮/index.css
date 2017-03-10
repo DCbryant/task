@@ -1,0 +1,15 @@
+/*水平垂直居中*/
+.container{
+    width: 960px;
+    height: 540px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-250%);
+}
+
+
+
+
+
+
